@@ -29,7 +29,9 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect((res) => {
         expect(res.body).toHaveProperty('status', 'ok');
-        expect(res.body).toHaveProperty('timestamp');
+        expect(res.body).toHaveProperty('info');
+        expect(res.body).toHaveProperty('error');
+        expect(res.body).toHaveProperty('details');
       });
   });
 });

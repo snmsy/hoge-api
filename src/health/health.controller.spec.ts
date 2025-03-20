@@ -9,7 +9,31 @@ describe('HealthController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [HealthController],
-      providers: [HealthService],
+      providers: [
+        {
+          provide: HealthService,
+          useValue: {
+            check: jest.fn().mockResolvedValue({
+              status: 'ok',
+              info: {
+                'nestjs-docs': { status: 'up' },
+                storage: { status: 'up' },
+                memory_heap: { status: 'up' },
+                memory_rss: { status: 'up' },
+                api: { status: 'up' },
+              },
+              error: {},
+              details: {
+                'nestjs-docs': { status: 'up' },
+                storage: { status: 'up' },
+                memory_heap: { status: 'up' },
+                memory_rss: { status: 'up' },
+                api: { status: 'up' },
+              },
+            }),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<HealthController>(HealthController);
@@ -21,11 +45,14 @@ describe('HealthController', () => {
   });
 
   describe('check', () => {
-    it('should return health status', () => {
-      const result = { status: 'ok', timestamp: 'test-timestamp' };
-      jest.spyOn(service, 'check').mockImplementation(() => result);
-
-      expect(controller.check()).toBe(result);
+    it('should return health status', async () => {
+      const result = await controller.check();
+      
+      expect(result).toHaveProperty('status', 'ok');
+      expect(result).toHaveProperty('info');
+      expect(result).toHaveProperty('error');
+      expect(result).toHaveProperty('details');
+      expect(service.check).toHaveBeenCalled();
     });
   });
 });
