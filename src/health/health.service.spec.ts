@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HealthService } from './health.service';
-import { HealthCheckService, HttpHealthIndicator, DiskHealthIndicator, MemoryHealthIndicator } from '@nestjs/terminus';
+import { HealthCheckService } from '@nestjs/terminus';
 
 describe('HealthService', () => {
   let service: HealthService;
@@ -19,25 +19,6 @@ describe('HealthService', () => {
               error: {},
               details: {},
             }),
-          },
-        },
-        {
-          provide: HttpHealthIndicator,
-          useValue: {
-            pingCheck: jest.fn(),
-          },
-        },
-        {
-          provide: DiskHealthIndicator,
-          useValue: {
-            checkStorage: jest.fn(),
-          },
-        },
-        {
-          provide: MemoryHealthIndicator,
-          useValue: {
-            checkHeap: jest.fn(),
-            checkRSS: jest.fn(),
           },
         },
       ],
