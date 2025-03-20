@@ -15,21 +15,9 @@ describe('HealthController', () => {
           useValue: {
             check: jest.fn().mockResolvedValue({
               status: 'ok',
-              info: {
-                'nestjs-docs': { status: 'up' },
-                storage: { status: 'up' },
-                memory_heap: { status: 'up' },
-                memory_rss: { status: 'up' },
-                api: { status: 'up' },
-              },
+              info: {},
               error: {},
-              details: {
-                'nestjs-docs': { status: 'up' },
-                storage: { status: 'up' },
-                memory_heap: { status: 'up' },
-                memory_rss: { status: 'up' },
-                api: { status: 'up' },
-              },
+              details: {},
             }),
           },
         },

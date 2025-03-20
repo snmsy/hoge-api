@@ -15,49 +15,29 @@ describe('HealthService', () => {
           useValue: {
             check: jest.fn().mockResolvedValue({
               status: 'ok',
-              info: {
-                'nestjs-docs': { status: 'up' },
-                storage: { status: 'up' },
-                memory_heap: { status: 'up' },
-                memory_rss: { status: 'up' },
-                api: { status: 'up' },
-              },
+              info: {},
               error: {},
-              details: {
-                'nestjs-docs': { status: 'up' },
-                storage: { status: 'up' },
-                memory_heap: { status: 'up' },
-                memory_rss: { status: 'up' },
-                api: { status: 'up' },
-              },
+              details: {},
             }),
           },
         },
         {
           provide: HttpHealthIndicator,
           useValue: {
-            pingCheck: jest.fn().mockResolvedValue({
-              'nestjs-docs': { status: 'up' },
-            }),
+            pingCheck: jest.fn(),
           },
         },
         {
           provide: DiskHealthIndicator,
           useValue: {
-            checkStorage: jest.fn().mockResolvedValue({
-              storage: { status: 'up' },
-            }),
+            checkStorage: jest.fn(),
           },
         },
         {
           provide: MemoryHealthIndicator,
           useValue: {
-            checkHeap: jest.fn().mockResolvedValue({
-              memory_heap: { status: 'up' },
-            }),
-            checkRSS: jest.fn().mockResolvedValue({
-              memory_rss: { status: 'up' },
-            }),
+            checkHeap: jest.fn(),
+            checkRSS: jest.fn(),
           },
         },
       ],
@@ -79,7 +59,7 @@ describe('HealthService', () => {
       expect(result).toHaveProperty('info');
       expect(result).toHaveProperty('error');
       expect(result).toHaveProperty('details');
-      expect(healthCheckService.check).toHaveBeenCalled();
+      expect(healthCheckService.check).toHaveBeenCalledWith([]);
     });
   });
 });

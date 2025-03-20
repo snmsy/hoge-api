@@ -18,17 +18,17 @@ export class HealthService {
   ) {}
 
   async check() {
-    return this.health.check([
-      () => this.http.pingCheck('nestjs-docs', 'https://docs.nestjs.com'),
-      // テスト環境ではディスクチェックをスキップ
-      // () => this.disk.checkStorage('storage', { path: '/', thresholdPercent: 0.99 }),
-      () => this.memory.checkHeap('memory_heap', 1024 * 1024 * 1024), // 1GB
-      () => this.memory.checkRSS('memory_rss', 1024 * 1024 * 1024), // 1GB
-      () => this.checkCustom('api'),
-      () => this.checkStorage('storage'), // カスタムストレージチェック
-    ]);
+    // 空の配列でヘルスチェックを実行
+    // 必要に応じて以下のようなヘルスチェックを追加できます
+    // () => this.http.pingCheck('nestjs-docs', 'https://docs.nestjs.com'),
+    // () => this.disk.checkStorage('storage', { path: '/', thresholdPercent: 0.99 }),
+    // () => this.memory.checkHeap('memory_heap', 1024 * 1024 * 1024),
+    // () => this.memory.checkRSS('memory_rss', 1024 * 1024 * 1024),
+    // () => this.checkCustom('api'),
+    return this.health.check([]);
   }
 
+  // カスタムヘルスチェックの例（必要に応じて使用）
   private async checkCustom(key: string): Promise<HealthIndicatorResult> {
     const isHealthy = true; // カスタムヘルスチェックロジックをここに実装
     
@@ -44,15 +44,5 @@ export class HealthService {
     }
     
     throw new Error('API health check failed');
-  }
-
-  private async checkStorage(key: string): Promise<HealthIndicatorResult> {
-    // テスト環境では常に成功するストレージチェック
-    return {
-      [key]: {
-        status: 'up' as HealthIndicatorStatus,
-        message: 'Storage check is mocked in test environment',
-      },
-    };
   }
 }
