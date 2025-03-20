@@ -1,133 +1,133 @@
-# Repository Microagent
+# リポジトリ Microagent
 
-## Purpose
+## 目的
 
-The Repository Microagent is responsible for managing and providing information about the repository structure, codebase, and development practices. It helps developers understand the project organization, coding standards, and provides guidance on how to navigate and contribute to the codebase.
+リポジトリ Microagentは、リポジトリの構造、コードベース、開発プラクティスに関する情報を管理・提供する役割を担います。開発者がプロジェクトの構成やコーディング規約を理解し、コードベースをナビゲートして貢献する方法についてのガイダンスを提供します。
 
-## Responsibilities
+## 責任範囲
 
-1. **Repository Structure**
-   - Explain the overall architecture and organization of the codebase
-   - Provide information about key directories and their purposes
-   - Help locate specific files or components
+1. **リポジトリ構造**
+   - コードベースの全体的なアーキテクチャと構成を説明
+   - 主要ディレクトリとその目的に関する情報を提供
+   - 特定のファイルやコンポーネントの場所を特定するサポート
 
-2. **Code Standards**
-   - Document coding conventions and style guidelines
-   - Explain naming conventions for files, classes, and functions
-   - Provide information about linting rules and code formatting
+2. **コード規約**
+   - コーディング規約とスタイルガイドラインの文書化
+   - ファイル、クラス、関数の命名規則の説明
+   - リンティングルールとコードフォーマットに関する情報提供
 
-3. **Development Workflow**
-   - Describe the branching strategy and git workflow
-   - Explain the PR review process
-   - Document the CI/CD pipeline and deployment process
+3. **開発ワークフロー**
+   - ブランチ戦略とGitワークフローの説明
+   - PRレビュープロセスの説明
+   - CI/CDパイプラインとデプロイプロセスの文書化
 
-4. **Dependency Management**
-   - Track and explain project dependencies
-   - Provide guidance on adding or updating dependencies
-   - Monitor for outdated or vulnerable dependencies
+4. **依存関係管理**
+   - プロジェクトの依存関係の追跡と説明
+   - 依存関係の追加や更新に関するガイダンスの提供
+   - 古いまたは脆弱性のある依存関係の監視
 
-5. **Documentation**
-   - Maintain up-to-date documentation about the repository
-   - Generate documentation from code when appropriate
-   - Ensure README and other documentation files are current
+5. **ドキュメント**
+   - リポジトリに関する最新のドキュメントの維持
+   - 適切な場合にコードからドキュメントを生成
+   - READMEやその他のドキュメントファイルが最新であることを確認
 
-## Repository Structure
+## リポジトリ構造
 
 ```
 hoge-api/
-├── .git/                  # Git repository metadata
-├── .openhands/            # OpenHands configuration and microagents
-│   └── microagents/       # Microagent definitions
-├── dist/                  # Compiled output (not tracked in git)
-├── node_modules/          # Node.js dependencies (not tracked in git)
-├── src/                   # Source code
-│   ├── app.controller.ts  # Main application controller
-│   ├── app.module.ts      # Main application module
-│   ├── app.service.ts     # Main application service
-│   ├── health/            # Health check module
-│   │   ├── health.controller.ts  # Health check controller
-│   │   ├── health.module.ts      # Health check module definition
-│   │   └── health.service.ts     # Health check service
-│   └── main.ts            # Application entry point
-├── test/                  # End-to-end tests
-├── .gitignore             # Git ignore file
-├── nest-cli.json          # NestJS CLI configuration
-├── package.json           # Node.js package definition
-├── package-lock.json      # Node.js package lock file
-├── README.md              # Project documentation
-├── tsconfig.json          # TypeScript configuration
-└── tsconfig.build.json    # TypeScript build configuration
+├── .git/                  # Gitリポジトリのメタデータ
+├── .openhands/            # OpenHands設定とマイクロエージェント
+│   └── microagents/       # Microagentの定義
+├── dist/                  # コンパイル出力（gitで追跡されない）
+├── node_modules/          # Node.js依存関係（gitで追跡されない）
+├── src/                   # ソースコード
+│   ├── app.controller.ts  # メインアプリケーションコントローラ
+│   ├── app.module.ts      # メインアプリケーションモジュール
+│   ├── app.service.ts     # メインアプリケーションサービス
+│   ├── health/            # ヘルスチェックモジュール
+│   │   ├── health.controller.ts  # ヘルスチェックコントローラ
+│   │   ├── health.module.ts      # ヘルスチェックモジュール定義
+│   │   └── health.service.ts     # ヘルスチェックサービス
+│   └── main.ts            # アプリケーションエントリーポイント
+├── test/                  # エンドツーエンドテスト
+├── .gitignore             # Gitの無視ファイル
+├── nest-cli.json          # NestJS CLI設定
+├── package.json           # Node.jsパッケージ定義
+├── package-lock.json      # Node.jsパッケージロックファイル
+├── README.md              # プロジェクトドキュメント
+├── tsconfig.json          # TypeScript設定
+└── tsconfig.build.json    # TypeScriptビルド設定
 ```
 
-## Technology Stack
+## 技術スタック
 
-- **Framework**: NestJS - A progressive Node.js framework for building efficient and scalable server-side applications
-- **Language**: TypeScript - A typed superset of JavaScript that compiles to plain JavaScript
-- **Testing**: Jest - A delightful JavaScript Testing Framework with a focus on simplicity
-- **Health Checks**: @nestjs/terminus - A module for NestJS that provides health checks
-- **HTTP Client**: @nestjs/axios - A module for NestJS that provides an HTTP client
+- **フレームワーク**: NestJS - 効率的でスケーラブルなサーバーサイドアプリケーションを構築するための進歩的なNode.jsフレームワーク
+- **言語**: TypeScript - JavaScriptにコンパイルされる型付きJavaScriptのスーパーセット
+- **テスト**: Jest - シンプルさに重点を置いた優れたJavaScriptテストフレームワーク
+- **ヘルスチェック**: @nestjs/terminus - ヘルスチェックを提供するNestJSモジュール
+- **HTTPクライアント**: @nestjs/axios - HTTPクライアントを提供するNestJSモジュール
 
-## Development Workflow
+## 開発ワークフロー
 
-### Branching Strategy
+### ブランチ戦略
 
-- `main` - The main branch containing production-ready code
-- Feature branches - Created from `main` for new features or bug fixes
-- Branch naming convention: `feature/feature-name` or `fix/bug-name`
+- `main` - 本番環境対応のコードを含むメインブランチ
+- 機能ブランチ - 新機能やバグ修正のために`main`から作成
+- ブランチ命名規則: `feature/機能名` または `fix/バグ名`
 
-### Pull Request Process
+### プルリクエストプロセス
 
-1. Create a feature branch from `main`
-2. Implement changes and write tests
-3. Submit a PR to `main`
-4. Ensure all tests pass
-5. Get code review and approval
-6. Merge to `main`
+1. `main`から機能ブランチを作成
+2. 変更を実装してテストを作成
+3. `main`へのPRを提出
+4. すべてのテストが通過することを確認
+5. コードレビューと承認を得る
+6. `main`にマージ
 
-### Code Style Guidelines
+### コードスタイルガイドライン
 
-- Follow the TypeScript and NestJS best practices
-- Use meaningful variable and function names
-- Write unit tests for all new functionality
-- Document public APIs with JSDoc comments
-- Keep functions small and focused on a single responsibility
+- TypeScriptとNestJSのベストプラクティスに従う
+- 意味のある変数名と関数名を使用
+- すべての新機能に対してユニットテストを作成
+- 公開APIをJSDocコメントでドキュメント化
+- 関数は小さく、単一の責任に焦点を当てる
 
-## Getting Started
+## 始め方
 
-### Installation
+### インストール
 
 ```bash
-# Install dependencies
+# 依存関係のインストール
 npm install
 
-# Start the development server
+# 開発サーバーの起動
 npm run start:dev
 ```
 
-### Testing
+### テスト
 
 ```bash
-# Run unit tests
+# ユニットテストの実行
 npm test
 
-# Run e2e tests
+# E2Eテストの実行
 npm run test:e2e
 ```
 
-### Building for Production
+### 本番環境用ビルド
 
 ```bash
-# Build the application
+# アプリケーションのビルド
 npm run build
 
-# Start the production server
+# 本番サーバーの起動
 npm run start:prod
 ```
 
-## Future Enhancements
+## 将来の拡張
 
-- Add database integration
-- Implement authentication and authorization
-- Add more comprehensive health checks
-- Set up CI/CD pipeline
-- Add API documentation with Swagger
+- データベース統合の追加
+- 認証と認可の実装
+- より包括的なヘルスチェックの追加
+- CI/CDパイプラインのセットアップ
+- SwaggerによるAPIドキュメントの追加
