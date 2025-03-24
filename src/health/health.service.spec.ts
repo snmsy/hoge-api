@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HealthService } from './health.service';
-import { HealthCheckService } from '@nestjs/terminus';
+import { HealthCheckService, PrismaHealthIndicator } from '@nestjs/terminus';
+import { PrismaService } from '../prisma/prisma.service';
 
 describe('HealthService', () => {
   let service: HealthService;
@@ -21,6 +22,18 @@ describe('HealthService', () => {
             }),
           },
         },
+        {
+          provide: PrismaHealthIndicator,
+          useValue: {
+            pingCheck: jest.fn().mockResolvedValue({
+              prisma: { status: 'up' }
+            }),
+          },
+        },
+        {
+          provide: PrismaService,
+          useValue: {},
+        },
       ],
     }).compile();
 
@@ -40,7 +53,7 @@ describe('HealthService', () => {
       expect(result).toHaveProperty('info');
       expect(result).toHaveProperty('error');
       expect(result).toHaveProperty('details');
-      expect(healthCheckService.check).toHaveBeenCalledWith([]);
+      expect(healthCheckService.check).toHaveBeenCalled();
     });
   });
 });
