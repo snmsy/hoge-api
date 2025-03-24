@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ClassSerializerInterceptor } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import * as request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
@@ -13,6 +14,7 @@ describe('PrefecturesController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
     await app.init();
   });
 
@@ -34,6 +36,10 @@ describe('PrefecturesController (e2e)', () => {
         // 各要素がcode, nameプロパティを持つことを確認
         expect(res.body[0]).toHaveProperty('code');
         expect(res.body[0]).toHaveProperty('name');
+        
+        // 各要素がcode, nameプロパティのみを持つことを確認（他のプロパティは@Excludeにより除外される）
+        expect(Object.keys(res.body[0]).length).toBe(2);
+        expect(Object.keys(res.body[0]).sort()).toEqual(['code', 'name'].sort());
         
         // 特定の都道府県が含まれていることを確認
         const hokkaido = res.body.find(prefecture => prefecture.code === '01');

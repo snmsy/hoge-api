@@ -1,10 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PrefecturesService } from './prefectures.service';
 import { PrefectureDto } from './dto/prefecture.dto';
 
 @ApiTags('prefectures')
 @Controller('api/prefectures')
+@UseInterceptors(ClassSerializerInterceptor)
 export class PrefecturesController {
   constructor(private readonly prefecturesService: PrefecturesService) {}
 
@@ -16,6 +17,7 @@ export class PrefecturesController {
     type: [PrefectureDto],
   })
   async findAll(): Promise<PrefectureDto[]> {
-    return this.prefecturesService.findAll();
+    const prefectures = await this.prefecturesService.findAll();
+    return prefectures.map(prefecture => new PrefectureDto(prefecture));
   }
 }
